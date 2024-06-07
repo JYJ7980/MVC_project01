@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.jyj.mapper.BookMapper">
+	<select id="bookList" resultType="bookDto">
+		SELECT * FROM book
+	</select>
+	<insert id="bookInsert" parameterType="bookDto">
+		INSERT INTO book(b_name, b_author, b_publisher, b_isbn)
+		VALUES (#{bookDto.b_name}, #{bookDto.b_author}, #{bookDto.b_publisher}, #{bookDto.b_isbn})
+	</insert>
+	<select id="bookOne" parameterType="int" resultType="bookDto">
+		SELECT * FROM book WHERE b_isbn=#{isbn}
+	</select>
+	<update id="bookUpdate" parameterType="bookDto">
+		UPDATE book SET b_name=#{bookDto.b_name}, b_author=#{bookDto.b_author}, b_publisher=#{bookDto.b_publisher}
+		WHERE b_isbn=#{bookDto.b_isbn}
+	</update>
+	<delete id="deleteBook" parameterType="int">
+		DELETE FROM book WHERE b_isbn=#{isbn}
+	</delete>
+</mapper>
